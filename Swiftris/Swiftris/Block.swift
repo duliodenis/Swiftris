@@ -44,20 +44,27 @@ enum BlockColor: Int, Printable {
 
 
 class Block: Hashable, Printable {
+    // Color of the Block
     let color: BlockColor
     
+    // the location of the Block on the game board
     var column: Int
     var row: Int
+    
+    // The visual element of the Block
     var sprite: SKSpriteNode?
     
+    // Convenience variable for code shortening
     var spriteName: String {
         return color.spriteName
     }
     
+    // hashValue calculated property required for the Hashable protocol
     var hashValue:  Int {
         return self.column ^ self.row
     }
     
+    // required for the Printable protocol
     var description: String {
         return "\(color): [\(column), \(row)]"
     }
@@ -69,7 +76,8 @@ class Block: Hashable, Printable {
     }
 }
 
-    func ==(lhs: Block, rhs:Block) -> Bool {
-        return lhs.column == rhs.column && lhs.row == rhs.row && lhs.color.toRaw() == rhs.color.toRaw()
-    }
+// Custom operator for block comparison that returns true if two blocks have the same location and color
+func ==(lhs: Block, rhs:Block) -> Bool {
+    return lhs.column == rhs.column && lhs.row == rhs.row && lhs.color.toRaw() == rhs.color.toRaw()
+}
 
